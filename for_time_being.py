@@ -71,5 +71,55 @@ if __name__ == "__main__":
 
 
 
+"""
+import matplotlib.pyplot as plt
+import geopandas as gpd
+import cartopy.crs as ccrs
+
+# Sample coordinates (latitude and longitude) of points in Turkey
+turkey_coordinates = [
+    (39.9334, 32.8597),  # Ankara
+    (41.0082, 28.9784),  # Istanbul
+    (38.4192, 27.1287),  # Izmir
+]
+
+# Load the world countries shapefile using Geopandas
+world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
+
+# Filter the data to get only Turkey
+turkey = world[world['name'] == 'Turkey']
+
+# Get the bounding box of Turkey
+turkey_bbox = turkey.total_bounds
+
+# Create a Cartopy PlateCarree projection centered around Turkey
+projection = ccrs.PlateCarree(central_longitude=(turkey_bbox[0] + turkey_bbox[2]) / 2)
+
+# Create a figure and axis for the map
+fig, ax = plt.subplots(subplot_kw={'projection': projection}, figsize=(10, 6))
+
+# Add country borders to the map
+ax.add_geometries(turkey['geometry'], crs=ccrs.PlateCarree(), edgecolor='black', facecolor='none', alpha=0.5)
+
+# Plot each point in Turkey on the map
+for lat, lon in turkey_coordinates:
+    ax.plot(lon, lat, 'bo', markersize=8, transform=ccrs.PlateCarree())
+
+# Add labels for each point (optional)
+for i, (lat, lon) in enumerate(turkey_coordinates):
+    plt.text(lon + 0.05, lat + 0.05, f'Point {i + 1}', transform=ccrs.PlateCarree())
+
+# Set the title for the map
+ax.set_title('Points in Turkey')
+
+# Set the map extent to zoom in on Turkey
+ax.set_extent([turkey_bbox[0], turkey_bbox[2], turkey_bbox[1], turkey_bbox[3]], crs=ccrs.PlateCarree())
+
+# Show the map
+plt.show()
+"""
+
+
+
 
 
