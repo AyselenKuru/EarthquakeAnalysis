@@ -12,12 +12,10 @@ def access_website(url):
     except requests.RequestException as e:
         print(f"An error occurred: {e}")
 def extract_content_between_pre_tags(html_content):
-    # Use regular expression to find the content between <pre> and </pre> tags
     pattern = r"<pre>(.*?)</pre>"
     match = re.search(pattern, html_content, re.DOTALL)
 
     if match:
-        # Extract the content found inside the <pre> tags
         extracted_content = match.group(1)
 
         # Save the content to a file
